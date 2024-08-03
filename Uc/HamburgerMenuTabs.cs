@@ -271,52 +271,30 @@
             {
                 if (menuSelectMode == 0)
                 {
-                    string menuCode = "";
-                    string menuText = e.Text!;
-                    string menuPath = "";
-                    string menuPath2 = "";
+                    string title = e.Text!;
+                    string path = "";
+                    string path2 = "";
+                    string? svg = "";
                     bool closeable = true;
                     Type? pageType = null;
                     if (e.Tag is MenuItemTag tag)
                     {
-                        if (tag.Code != null) menuCode = tag.Code;
-                        if (tag.Path != null) menuPath = tag.Path;
-                        if (tag.Path2 != null) menuPath2 = tag.Path2;
+                        if (tag.Path != null) path = tag.Path;
+                        if (tag.Path2 != null) path2 = tag.Path2;
                         if (tag.PageType != null) pageType = tag.PageType;
+                        svg = e.IconSvg;
                         closeable = tag.Closeable;
                     }
 
-                    LoadTabPage(menuText, menuPath, menuPath2, pageType, closeable);
+                    LoadTabPage(title, path, path2, pageType, svg, closeable);
                 }
             };
 
-            tabs1.TabPages.Clear();
+            // 当 Type = Card 且 Style.Closable = True 且 Gap 为默认值 8 时，TabPage.Text 如包含中文则无法正常显示！
+            // 截止 AntdUI v1.5.0，这个问题仍然存在！
+            tabs1.Gap = 18;
 
-            // 双击选项卡关闭页面
-            tabs1.MouseDoubleClick += (s, e) =>
-            {
-                if (e.Button == MouseButtons.Left)
-                {
-                    TabPage? page = tabs1.SelectedTab;
-                    if (page != null)
-                    {
-                        if (page.Tag is TabPageTag tag)
-                        {
-                            bool closeable = tag.Closeable;
-                            if (closeable)
-                            {
-                                page.Dispose();
-                                if (tabs1.SelectedTab == null)
-                                {
-                                    UnSelectMenuAll(null);
-                                    menu1.Refresh();
-                                    MenuCollapsedAll(null);
-                                }
-                            }
-                        }
-                    }
-                }
-            };
+            //tabs1.Pages.Clear();
 
             // 手动切换页面后定位菜单项
             tabs1.SelectedIndexChanged += (s, e) =>
@@ -325,13 +303,6 @@
                 {
                     MenuLocateAfterTabPageSelected();
                 }
-            };
-
-            tabs1.MouseMove += (s, e) =>
-            {
-                // 注：此事件无法触发！
-                var mPos = e.Location;
-                System.Diagnostics.Debug.Print($"[{DateTime.Now:HH:mm:ss.fff}] {mPos}");
             };
         }
 
@@ -606,13 +577,13 @@
         /// <param name="path"></param>
         /// <param name="path2"></param>
         /// <param name="pageType"></param>
-        private void LoadTabPage(string title, string path, string path2, Type? pageType, bool closeable)
+        private void LoadTabPage(string title, string path, string path2, Type? pageType, string? svg, bool closeable)
         {
             tabPageSelectMode = 1;
 
             bool findInstance = false;
 
-            foreach (TabPage _page in tabs1.TabPages)
+            foreach (AntdUI.TabPage _page in tabs1.Pages)
             {
                 if (_page.Tag is TabPageTag tag)
                 {
@@ -627,18 +598,17 @@
 
             if (!findInstance)
             {
-                TabPage page = new()
+                AntdUI.TabPage page = new()
                 {
                     Text = title,
-                    ToolTipText = path2,
+                    IconSvg = svg,
                     Tag = new TabPageTag(path) { Closeable = closeable },
-                    Padding = new(0),
                 };
+                tipB.SetTip(page, $"{path2}");  // 工具提示无效
 
                 AntdUI.Panel panel = new()
                 {
                     Dock = DockStyle.Fill,
-                    Radius = 0,
                     Padding = new(2),
                 };
                 page.Controls.Add(panel);
@@ -672,7 +642,7 @@
                     panel.Controls.Add(alert);
                 }
 
-                tabs1.TabPages.Add(page);
+                tabs1.Pages.Add(page);
                 tabs1.SelectedTab = page;
             }
 
@@ -684,23 +654,20 @@
         /// </summary>
         private void MenuLocateAfterTabPageSelected()
         {
-            TabPage? page = tabs1.SelectedTab;
+            AntdUI.TabPage? page = tabs1.SelectedTab;
 
             if (page != null)
             {
-                string? path = null;
+                string path = "";
                 if (page.Tag is TabPageTag tag)
                 {
-                    path = tag.MenuPath;
+                    path = tag.MenuPath!;
                 }
-                if (path != null)
-                {
-                    MenuCollapsedAll(null);
-                    menuSelectMode = 1;
-                    SelectMenu(path, null);
-                    menuSelectMode = 0;
-                    menu1.Refresh();
-                }
+                MenuCollapsedAll(null);
+                menuSelectMode = 1;
+                SelectMenu(path, null);
+                menuSelectMode = 0;
+                menu1.Refresh();
             }
         }
     }

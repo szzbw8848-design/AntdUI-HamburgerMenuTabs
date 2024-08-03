@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AntdUI" Version="1.4.5" />
+    <PackageReference Include="AntdUI" Version="1.5.0" />
   </ItemGroup>
 
 </Project>

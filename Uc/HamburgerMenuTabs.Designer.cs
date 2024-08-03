@@ -28,18 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            AntdUI.Tabs.StyleCard styleCard1 = new AntdUI.Tabs.StyleCard();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HamburgerMenuTabs));
             panelMain = new AntdUI.Panel();
             panelTabs = new AntdUI.Panel();
             tabs1 = new AntdUI.Tabs();
+            tabPage1 = new AntdUI.TabPage();
             panelMenu = new AntdUI.Panel();
             tlpMenu = new TableLayoutPanel();
             menu1 = new AntdUI.Menu();
             panelMenuHeader = new AntdUI.Panel();
             inputMenuSearch = new AntdUI.Input();
             btnMenuCollapsed = new AntdUI.Button();
+            tipB = new AntdUI.TooltipComponent();
             panelMain.SuspendLayout();
             panelTabs.SuspendLayout();
+            tabs1.SuspendLayout();
             panelMenu.SuspendLayout();
             tlpMenu.SuspendLayout();
             panelMenuHeader.SuspendLayout();
@@ -72,15 +76,24 @@
             // tabs1
             // 
             tabs1.Dock = DockStyle.Fill;
-            tabs1.ItemSize = new Size(73, 30);
+            tabs1.Font = new Font("微软雅黑", 9F);
             tabs1.Location = new Point(2, 2);
             tabs1.Name = "tabs1";
-            tabs1.Padding = new Point(20, 3);
-            tabs1.SelectedIndex = 0;
-            tabs1.ShowToolTips = true;
+            tabs1.Pages.Add(tabPage1);
             tabs1.Size = new Size(494, 458);
+            styleCard1.Closable = true;
+            tabs1.Style = styleCard1;
             tabs1.TabIndex = 0;
             tabs1.Type = AntdUI.TabType.Card;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Dock = DockStyle.Fill;
+            tabPage1.Location = new Point(3, 29);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Size = new Size(488, 426);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "测试";
             // 
             // panelMenu
             // 
@@ -138,19 +151,23 @@
             inputMenuSearch.Location = new Point(50, 0);
             inputMenuSearch.Name = "inputMenuSearch";
             inputMenuSearch.PlaceholderText = "搜索菜单";
-            inputMenuSearch.PrefixSvg = Svgs.Search;
+            inputMenuSearch.PrefixSvg = resources.GetString("inputMenuSearch.PrefixSvg");
             inputMenuSearch.Size = new Size(190, 44);
-            inputMenuSearch.SuffixSvg = Svgs.Clear;
+            inputMenuSearch.SuffixSvg = resources.GetString("inputMenuSearch.SuffixSvg");
             inputMenuSearch.TabIndex = 1;
             // 
             // btnMenuCollapsed
             // 
             btnMenuCollapsed.Dock = DockStyle.Left;
-            btnMenuCollapsed.ImageSvg = Svgs.Menu;
+            btnMenuCollapsed.ImageSvg = resources.GetString("btnMenuCollapsed.ImageSvg");
             btnMenuCollapsed.Location = new Point(0, 0);
             btnMenuCollapsed.Name = "btnMenuCollapsed";
             btnMenuCollapsed.Size = new Size(50, 44);
             btnMenuCollapsed.TabIndex = 0;
+            // 
+            // tipB
+            // 
+            tipB.ArrowAlign = AntdUI.TAlign.Bottom;
             // 
             // HamburgerMenuTabs
             // 
@@ -161,6 +178,7 @@
             Size = new Size(768, 472);
             panelMain.ResumeLayout(false);
             panelTabs.ResumeLayout(false);
+            tabs1.ResumeLayout(false);
             panelMenu.ResumeLayout(false);
             tlpMenu.ResumeLayout(false);
             panelMenuHeader.ResumeLayout(false);
@@ -178,5 +196,7 @@
         private AntdUI.Panel panelMenuHeader;
         private AntdUI.Input inputMenuSearch;
         private AntdUI.Button btnMenuCollapsed;
+        private AntdUI.TooltipComponent tipB;
+        private AntdUI.TabPage tabPage1;
     }
 }

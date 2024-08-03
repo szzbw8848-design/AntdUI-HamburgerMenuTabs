@@ -17,8 +17,10 @@
                 Text = title,
                 Dock = DockStyle.Top,
                 Height = 50,
-                Type = AntdUI.TTypeMini.Primary,
+                Type = AntdUI.TTypeMini.Info,
+                //BackExtend = "135,#f02fc2,#6094ea",
             };
+            SetButtonBackExtendRandomly(btn1);
             panel.Controls.Add(btn1);
 
             var btn2 = new AntdUI.Button()
@@ -35,7 +37,7 @@
                 Text = $"{path2}",
                 Dock = DockStyle.Bottom,
                 Height = 50,
-                Type = AntdUI.TTypeMini.Info,
+                Type = AntdUI.TTypeMini.Error,
             };
             panel.Controls.Add(btn3);
 
@@ -47,6 +49,14 @@
                 Type = AntdUI.TTypeMini.Warn,
             };
             panel.Controls.Add(btn4);
+        }
+
+        private static void SetButtonBackExtendRandomly(AntdUI.Button btn)
+        {
+            Random rnd = new();
+            Color color1 = Color.FromArgb(rnd.Next(50, 200), rnd.Next(50, 200), rnd.Next(50, 200));
+            Color color2 = Color.FromArgb(rnd.Next(50, 200), rnd.Next(50, 200), rnd.Next(50, 200));
+            btn.BackExtend = $"135,{ColorTranslator.ToHtml(color1)},{ColorTranslator.ToHtml(color2)}";
         }
     }
 }
