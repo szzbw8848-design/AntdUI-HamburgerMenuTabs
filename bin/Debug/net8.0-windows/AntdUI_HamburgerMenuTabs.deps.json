@@ -8,17 +8,17 @@
     ".NETCoreApp,Version=v8.0": {
       "AntdUI_HamburgerMenuTabs/1.0.0": {
         "dependencies": {
-          "AntdUI": "1.5.0"
+          "AntdUI": "1.5.3"
         },
         "runtime": {
           "AntdUI_HamburgerMenuTabs.dll": {}
         }
       },
-      "AntdUI/1.5.0": {
+      "AntdUI/1.5.3": {
         "runtime": {
           "lib/net8.0-windows7.0/AntdUI.dll": {
-            "assemblyVersion": "1.5.0.0",
-            "fileVersion": "1.5.0.0"
+            "assemblyVersion": "1.5.3.0",
+            "fileVersion": "1.5.3.0"
           }
         }
       }
@@ -30,12 +30,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "AntdUI/1.5.0": {
+    "AntdUI/1.5.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Ju90TwgqzpWis+Wd0tmDVbCT/atsYZAej5OyC5W/7v+/B5uGPMOlzgLvloVqNSCMzLhNhulhJIPMPMUdAMGmKg==",
-      "path": "antdui/1.5.0",
-      "hashPath": "antdui.1.5.0.nupkg.sha512"
+      "sha512": "sha512-yWQH25Na8/Fg2bKmu83Ulb3arYzCs/buifKyUsoj1F1L8tMfke3bvSTw8tOeiqPjzP39lnWeePYOB5wmjkXZ1g==",
+      "path": "antdui/1.5.3",
+      "hashPath": "antdui.1.5.3.nupkg.sha512"
     }
   }
 }

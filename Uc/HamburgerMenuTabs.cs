@@ -2,7 +2,6 @@
 {
     /// <summary>
     /// 汉堡包菜单 + 多标签页面
-    /// 在主窗体置顶的前提下，因 AntdUI v1.4.5 存在 BUG，会导致菜单横向收缩后，一级菜单（无子菜单）的提示信息无法显示（应该是被主窗体遮挡了）。另外，Tabs 的工具提示也无法显示。
     /// </summary>
     public partial class HamburgerMenuTabs : UserControl
     {
@@ -289,10 +288,6 @@
                     LoadTabPage(title, path, path2, pageType, svg, closeable);
                 }
             };
-
-            // 当 Type = Card 且 Style.Closable = True 且 Gap 为默认值 8 时，TabPage.Text 如包含中文则无法正常显示！
-            // 截止 AntdUI v1.5.0，这个问题仍然存在！
-            tabs1.Gap = 18;
 
             //tabs1.Pages.Clear();
 

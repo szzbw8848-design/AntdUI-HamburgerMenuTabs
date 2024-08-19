@@ -13,7 +13,7 @@ namespace AntdUI_HamburgerMenuTabs
             BackColor = Color.Black;
             ForeColor = Color.White;
             StartPosition = FormStartPosition.CenterScreen;
-            //TopMost = true;
+            TopMost = true;
 
             windowBar1.Text = $"汉堡包菜单 + 多标签页面";
             windowBar1.SubText = "演示";
