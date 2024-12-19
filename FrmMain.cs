@@ -54,16 +54,16 @@ namespace AntdUI_HamburgerMenuTabs
         private void InitHamburgerMenuTabs()
         {
             List<MyMenuItem> menus = [
-                new MyMenuItem("home", "主页", SvgIcons.Home)
+                new MyMenuItem("home", "主页", "HomeFilled")
                 {
                     PageType = typeof(Pages.Home),
                     Closeable = false,
                 },
-                new MyMenuItem("menu.1", "菜单 1", SvgIcons.MenuItem)
+                new MyMenuItem("menu.1", "菜单 1", "ProductFilled")
                 {
                     PageType = typeof(Pages.TestWithArgs),
                 },
-                new MyMenuItem("menu.2", "菜单 2", SvgIcons.MenuItem)
+                new MyMenuItem("menu.2", "菜单 2", "ProductFilled")
                 {
                     Sub = [
                         new MyMenuItem("menu.2.1", "菜单 2.1", null)
@@ -76,7 +76,7 @@ namespace AntdUI_HamburgerMenuTabs
                         },
                     ],
                 },
-                new MyMenuItem("menu.3", "菜单 3", SvgIcons.MenuItem)
+                new MyMenuItem("menu.3", "菜单 3", "ProductFilled")
                 {
                     Sub = [
                         new MyMenuItem("menu.3.1", "菜单 3.1", null)

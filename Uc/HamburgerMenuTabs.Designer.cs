@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             AntdUI.Tabs.StyleCard styleCard1 = new AntdUI.Tabs.StyleCard();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HamburgerMenuTabs));
             panelMain = new AntdUI.Panel();
             panelTabs = new AntdUI.Panel();
             tabs1 = new AntdUI.Tabs();
@@ -140,21 +139,22 @@
             // 
             // inputMenuSearch
             // 
+            inputMenuSearch.AllowClear = true;
             inputMenuSearch.Dock = DockStyle.Fill;
             inputMenuSearch.IconRatio = 1F;
             inputMenuSearch.Location = new Point(50, 0);
             inputMenuSearch.Name = "inputMenuSearch";
             inputMenuSearch.PlaceholderText = "搜索菜单";
-            inputMenuSearch.PrefixSvg = resources.GetString("inputMenuSearch.PrefixSvg");
+            inputMenuSearch.PrefixSvg = "SearchOutlined";
             inputMenuSearch.Size = new Size(190, 44);
-            inputMenuSearch.SuffixSvg = resources.GetString("inputMenuSearch.SuffixSvg");
+            inputMenuSearch.SuffixSvg = "";
             inputMenuSearch.TabIndex = 1;
             // 
             // btnMenuCollapsed
             // 
             btnMenuCollapsed.Dock = DockStyle.Left;
             btnMenuCollapsed.IconRatio = 1F;
-            btnMenuCollapsed.IconSvg = resources.GetString("btnMenuCollapsed.IconSvg");
+            btnMenuCollapsed.IconSvg = "MenuOutlined";
             btnMenuCollapsed.Location = new Point(0, 0);
             btnMenuCollapsed.Name = "btnMenuCollapsed";
             btnMenuCollapsed.Size = new Size(50, 44);
