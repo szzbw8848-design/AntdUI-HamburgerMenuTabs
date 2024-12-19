@@ -9,10 +9,12 @@
         {
             InitializeComponent();
 
+            tabs1.TypExceed = AntdUI.TabTypExceed.Button;
+
             InitMenu();
         }
 
-        public class Svgs
+        private class Svgs
         {
             /// <summary>
             /// 汉堡包菜单
@@ -270,18 +272,18 @@
             {
                 if (menuSelectMode == 0)
                 {
-                    string title = e.Text!;
+                    string title = e.Value.Text!;
                     string path = "";
                     string path2 = "";
                     string? svg = "";
                     bool closeable = true;
                     Type? pageType = null;
-                    if (e.Tag is MenuItemTag tag)
+                    if (e.Value.Tag is MenuItemTag tag)
                     {
                         if (tag.Path != null) path = tag.Path;
                         if (tag.Path2 != null) path2 = tag.Path2;
                         if (tag.PageType != null) pageType = tag.PageType;
-                        svg = e.IconSvg;
+                        svg = e.Value.IconSvg;
                         closeable = tag.Closeable;
                     }
 
@@ -599,7 +601,17 @@
                     IconSvg = svg,
                     Tag = new TabPageTag(path) { Closeable = closeable },
                 };
-                tipB.SetTip(page, $"{path2}");  // 工具提示无效
+                if (!closeable)
+                {
+                    page.ReadOnly = true;
+                }
+                page.Disposed += (s, e) =>
+                {
+                    if (ParentForm != null)
+                    {
+                        AntdUI.Message.info(ParentForm, $"页面【{page.Text}】已关闭。");
+                    }
+                };
 
                 AntdUI.Panel panel = new()
                 {
@@ -645,6 +657,15 @@
         }
 
         /// <summary>
+        /// 获取当前选中的 TabPage
+        /// </summary>
+        /// <returns></returns>
+        public AntdUI.TabPage? GetSelectedTab()
+        {
+            return tabs1.SelectedTab;
+        }
+
+        /// <summary>
         /// 手动切换页面后定位菜单项
         /// </summary>
         private void MenuLocateAfterTabPageSelected()
@@ -663,6 +684,33 @@
                 SelectMenu(path, null);
                 menuSelectMode = 0;
                 menu1.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// 菜单默认选中项
+        /// </summary>
+        public void MenuSelectDefault()
+        {
+            var item = menu1.Items.FirstOrDefault();
+            if (item != null)
+            {
+                string title = item.Text!;
+                string path = "";
+                string path2 = "";
+                string? svg = "";
+                bool closeable = true;
+                Type? pageType = null;
+                if (item.Tag is MenuItemTag tag)
+                {
+                    if (tag.Path != null) path = tag.Path;
+                    if (tag.Path2 != null) path2 = tag.Path2;
+                    if (tag.PageType != null) pageType = tag.PageType;
+                    svg = item.IconSvg;
+                    closeable = tag.Closeable;
+                }
+
+                LoadTabPage(title, path, path2, pageType, svg, closeable);
             }
         }
     }

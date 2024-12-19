@@ -1,6 +1,6 @@
 ﻿namespace AntdUI_HamburgerMenuTabs
 {
-    partial class Form1
+    partial class FrmMain
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,19 +29,35 @@
         private void InitializeComponent()
         {
             windowBar1 = new AntdUI.WindowBar();
+            btnFullScreen = new AntdUI.Button();
             panelMain = new AntdUI.Panel();
             hmt = new Uc.HamburgerMenuTabs();
+            tip1 = new AntdUI.TooltipComponent();
+            btnTheme = new AntdUI.Button();
+            windowBar1.SuspendLayout();
             panelMain.SuspendLayout();
             SuspendLayout();
             // 
             // windowBar1
             // 
+            windowBar1.Controls.Add(btnTheme);
+            windowBar1.Controls.Add(btnFullScreen);
             windowBar1.Dock = DockStyle.Top;
             windowBar1.Location = new Point(0, 0);
             windowBar1.Name = "windowBar1";
             windowBar1.Size = new Size(800, 30);
             windowBar1.TabIndex = 0;
             windowBar1.Text = "windowBar1";
+            // 
+            // btnFullScreen
+            // 
+            btnFullScreen.Dock = DockStyle.Right;
+            btnFullScreen.Ghost = true;
+            btnFullScreen.IconSvg = "ExpandOutlined";
+            btnFullScreen.Location = new Point(626, 0);
+            btnFullScreen.Name = "btnFullScreen";
+            btnFullScreen.Size = new Size(30, 30);
+            btnFullScreen.TabIndex = 0;
             // 
             // panelMain
             // 
@@ -61,7 +77,22 @@
             hmt.Size = new Size(800, 420);
             hmt.TabIndex = 0;
             // 
-            // Form1
+            // tip1
+            // 
+            tip1.ArrowAlign = AntdUI.TAlign.Bottom;
+            tip1.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            // 
+            // btnTheme
+            // 
+            btnTheme.Dock = DockStyle.Right;
+            btnTheme.Ghost = true;
+            btnTheme.IconSvg = "MoonOutlined";
+            btnTheme.Location = new Point(596, 0);
+            btnTheme.Name = "btnTheme";
+            btnTheme.Size = new Size(30, 30);
+            btnTheme.TabIndex = 1;
+            // 
+            // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -69,8 +100,9 @@
             Controls.Add(panelMain);
             Controls.Add(windowBar1);
             Font = new Font("微软雅黑", 9F);
-            Name = "Form1";
+            Name = "FrmMain";
             Text = "Form1";
+            windowBar1.ResumeLayout(false);
             panelMain.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -80,5 +112,8 @@
         private AntdUI.WindowBar windowBar1;
         private AntdUI.Panel panelMain;
         private Uc.HamburgerMenuTabs hmt;
+        private AntdUI.Button btnFullScreen;
+        private AntdUI.TooltipComponent tip1;
+        private AntdUI.Button btnTheme;
     }
 }
