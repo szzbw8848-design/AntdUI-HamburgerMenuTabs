@@ -10,6 +10,7 @@ namespace AntdUI_HamburgerMenuTabs
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+            AntdUI.Config.ShowInWindowByMessage = true;
             ApplicationConfiguration.Initialize();
             Application.Run(new FrmMain());
         }

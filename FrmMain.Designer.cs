@@ -29,13 +29,11 @@
         private void InitializeComponent()
         {
             windowBar1 = new AntdUI.WindowBar();
+            btnTheme = new AntdUI.Button();
             btnFullScreen = new AntdUI.Button();
             panelMain = new AntdUI.Panel();
-            hmt = new Uc.HamburgerMenuTabs();
-            tip1 = new AntdUI.TooltipComponent();
-            btnTheme = new AntdUI.Button();
+            tipB = new AntdUI.TooltipComponent();
             windowBar1.SuspendLayout();
-            panelMain.SuspendLayout();
             SuspendLayout();
             // 
             // windowBar1
@@ -45,52 +43,44 @@
             windowBar1.Dock = DockStyle.Top;
             windowBar1.Location = new Point(0, 0);
             windowBar1.Name = "windowBar1";
-            windowBar1.Size = new Size(800, 30);
+            windowBar1.Size = new Size(800, 40);
             windowBar1.TabIndex = 0;
             windowBar1.Text = "windowBar1";
-            // 
-            // btnFullScreen
-            // 
-            btnFullScreen.Dock = DockStyle.Right;
-            btnFullScreen.Ghost = true;
-            btnFullScreen.IconSvg = "ExpandOutlined";
-            btnFullScreen.Location = new Point(626, 0);
-            btnFullScreen.Name = "btnFullScreen";
-            btnFullScreen.Size = new Size(30, 30);
-            btnFullScreen.TabIndex = 0;
-            // 
-            // panelMain
-            // 
-            panelMain.Controls.Add(hmt);
-            panelMain.Dock = DockStyle.Fill;
-            panelMain.Location = new Point(0, 30);
-            panelMain.Name = "panelMain";
-            panelMain.Size = new Size(800, 420);
-            panelMain.TabIndex = 1;
-            panelMain.Text = "panel1";
-            // 
-            // hmt
-            // 
-            hmt.Dock = DockStyle.Fill;
-            hmt.Location = new Point(0, 0);
-            hmt.Name = "hmt";
-            hmt.Size = new Size(800, 420);
-            hmt.TabIndex = 0;
-            // 
-            // tip1
-            // 
-            tip1.ArrowAlign = AntdUI.TAlign.Bottom;
-            tip1.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             // 
             // btnTheme
             // 
             btnTheme.Dock = DockStyle.Right;
             btnTheme.Ghost = true;
             btnTheme.IconSvg = "MoonOutlined";
-            btnTheme.Location = new Point(596, 0);
+            btnTheme.Location = new Point(576, 0);
             btnTheme.Name = "btnTheme";
-            btnTheme.Size = new Size(30, 30);
+            btnTheme.Size = new Size(40, 40);
             btnTheme.TabIndex = 1;
+            // 
+            // btnFullScreen
+            // 
+            btnFullScreen.Dock = DockStyle.Right;
+            btnFullScreen.Ghost = true;
+            btnFullScreen.IconSvg = "ExpandOutlined";
+            btnFullScreen.Location = new Point(616, 0);
+            btnFullScreen.Name = "btnFullScreen";
+            btnFullScreen.Size = new Size(40, 40);
+            btnFullScreen.TabIndex = 0;
+            // 
+            // panelMain
+            // 
+            panelMain.Dock = DockStyle.Fill;
+            panelMain.Location = new Point(0, 40);
+            panelMain.Name = "panelMain";
+            panelMain.Size = new Size(800, 410);
+            panelMain.TabIndex = 1;
+            panelMain.Text = "panel1";
+            // 
+            // tipB
+            // 
+            tipB.ArrowAlign = AntdUI.TAlign.Bottom;
+            tipB.CustomWidth = 300;
+            tipB.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             // 
             // FrmMain
             // 
@@ -103,7 +93,6 @@
             Name = "FrmMain";
             Text = "Form1";
             windowBar1.ResumeLayout(false);
-            panelMain.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -111,9 +100,8 @@
 
         private AntdUI.WindowBar windowBar1;
         private AntdUI.Panel panelMain;
-        private Uc.HamburgerMenuTabs hmt;
         private AntdUI.Button btnFullScreen;
-        private AntdUI.TooltipComponent tip1;
+        private AntdUI.TooltipComponent tipB;
         private AntdUI.Button btnTheme;
     }
 }

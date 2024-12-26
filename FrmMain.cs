@@ -1,34 +1,73 @@
-using static AntdUI_HamburgerMenuTabs.Uc.HamburgerMenuTabs;
+using MyMenuItem = AntdUI_HamburgerMenuTabs.Uc.HamburgerMenuTabs.MyMenuItem;
 
 namespace AntdUI_HamburgerMenuTabs
 {
     public partial class FrmMain : AntdUI.Window
     {
+        private Uc.HamburgerMenuTabs hmt = new();
+
         public FrmMain()
         {
             InitializeComponent();
 
+            Size = new(1024, 576);
             StartPosition = FormStartPosition.CenterScreen;
             //TopMost = true;
 
-            Helpers.Antd.SetTheme(this, btnTheme, true, Properties.Settings.Default.ThemeColor);
+            Helpers.Antd.SetTheme(this, btnTheme);
 
             windowBar1.Text = $"汉堡包菜单 + 多标签页面";
             windowBar1.SubText = "演示";
 
-            tip1.SetTip(btnFullScreen, "全屏显示 (F11)");
+            tipB.SetTip(btnFullScreen, "全屏显示 (F11)");
             btnFullScreen.Click += (s, e) =>
             {
                 ShowFullScreen();
             };
 
-            tip1.SetTip(btnTheme, "切换主题");
+            tipB.SetTip(btnTheme, "切换主题");
             btnTheme.Click += (s, e) =>
             {
                 Helpers.Antd.SetTheme(this, btnTheme, !AntdUI.Config.IsDark, Properties.Settings.Default.ThemeColor);
             };
 
+            hmt.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(hmt);
             InitHamburgerMenuTabs();
+
+            #region Panel 背景色测试
+            // Panel 背景色为 Transparent 时，调整窗口尺寸时会非常卡！而默认背景色为 Control 时没有这个问题，但是线条很丑！
+            AntdUI.Button btnPanelBackColorSwitch = new()
+            {
+                Text = $"切换 Panel 背景色（当前 BackColor = Control - {panelMain.BackColor}）",
+                AutoSize = true,
+                AutoSizeMode = AntdUI.TAutoSize.Width,
+                Dock = DockStyle.Right,
+                Type = AntdUI.TTypeMini.Primary,
+                IconSvg = "BugFilled",
+            };
+            btnPanelBackColorSwitch.Click += (s, e) =>
+            {
+                if (panelMain.BackColor == Color.Transparent)
+                {
+                    panelMain.BackColor = default;
+                    btnPanelBackColorSwitch.Text = $"切换 Panel 背景色（当前 BackColor = Control - {panelMain.BackColor}）";
+                }
+                else
+                {
+                    panelMain.BackColor = Color.Transparent;
+                    btnPanelBackColorSwitch.Text = "切换 Panel 背景色（当前 BackColor = Transparent）";
+                }
+                AntdUI.Message.open(new AntdUI.Message.Config(this, $"Panel 背景色：{panelMain.BackColor}", AntdUI.TType.Warn)
+                {
+                    Font = new(Font.FontFamily, 15),
+                    Align = AntdUI.TAlignFrom.Bottom,
+                    Padding = new(15, 15),
+                });
+            };
+            windowBar1.Controls.Add(btnPanelBackColorSwitch);
+            btnPanelBackColorSwitch.BringToFront();
+            #endregion
         }
 
         /// <summary>
@@ -137,6 +176,8 @@ namespace AntdUI_HamburgerMenuTabs
                     // 从页面上获取子控件
                     var c = page.Controls[0];
 
+                    frm.SuspendLayout();
+
                     // 把子控件添加到全屏显示窗口
                     frm.Controls.Add(c);
 
@@ -148,6 +189,8 @@ namespace AntdUI_HamburgerMenuTabs
                 }
 
                 frm.Show(this);
+
+                frm.ResumeLayout();
             }
         }
     }

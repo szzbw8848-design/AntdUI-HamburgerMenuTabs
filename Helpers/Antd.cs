@@ -7,19 +7,44 @@
         /// <summary>
         /// 设置主题
         /// </summary>
-        /// <param name="dark"></param>
-        public static void SetTheme(AntdUI.Window window, AntdUI.Button btnSwitch, bool dark, Color primary)
+        /// <param name="window"></param>
+        /// <param name="btnSwitch"></param>
+        public static void SetTheme(AntdUI.Window window, AntdUI.Button? btnSwitch)
         {
+            bool dark = Properties.Settings.Default.ThemeDark;
+            Color primary = Properties.Settings.Default.ThemeColor;
             AntdUI.Config.IsDark = dark;
             if (dark)
             {
-                btnSwitch.IconSvg = "MoonFilled";
+                if (btnSwitch != null) btnSwitch.IconSvg = "MoonFilled";
                 window.BackColor = Color.Black;
                 window.ForeColor = Color.White;
             }
             else
             {
-                btnSwitch.IconSvg = "SunOutlined";
+                if (btnSwitch != null) btnSwitch.IconSvg = "SunOutlined";
+                window.BackColor = Color.White;
+                window.ForeColor = Color.Black;
+            }
+            AntdUI.Style.SetPrimary(primary);
+        }
+
+        /// <summary>
+        /// 设置主题
+        /// </summary>
+        /// <param name="dark"></param>
+        public static void SetTheme(AntdUI.Window window, AntdUI.Button? btnSwitch, bool dark, Color primary)
+        {
+            AntdUI.Config.IsDark = dark;
+            if (dark)
+            {
+                if (btnSwitch != null) btnSwitch.IconSvg = "MoonFilled";
+                window.BackColor = Color.Black;
+                window.ForeColor = Color.White;
+            }
+            else
+            {
+                if (btnSwitch != null) btnSwitch.IconSvg = "SunOutlined";
                 window.BackColor = Color.White;
                 window.ForeColor = Color.Black;
             }
@@ -86,6 +111,209 @@
                     subWin.Refresh();
                 }
             }
+        }
+
+        /// <summary>
+        /// 消息提示窗
+        /// </summary>
+        public class Msgbox
+        {
+            /// <summary>
+            /// 消息提示窗
+            /// </summary>
+            /// <param name="parent">父窗体</param>
+            /// <param name="msg"></param>
+            /// <param name="maskClosable">点击蒙层是否允许关闭</param>
+            /// <returns></returns>
+            public static DialogResult ShowInfo(Form parent, string msg, bool maskClosable = true)
+            {
+                Form frm = parent;
+                DialogResult res = AntdUI.Modal.open(new AntdUI.Modal.Config(frm, "提示", msg, AntdUI.TType.Info)
+                {
+                    Font = frm.Font,
+                    MaskClosable = maskClosable,
+                    CancelText = null,
+                });
+                return res;
+            }
+
+            /// <summary>
+            /// 成功提示窗
+            /// </summary>
+            /// <param name="parent">父窗体</param>
+            /// <param name="msg"></param>
+            /// <param name="maskClosable">点击蒙层是否允许关闭</param>
+            /// <returns></returns>
+            public static DialogResult ShowSuccess(Form parent, string msg, bool maskClosable = true)
+            {
+                Form frm = parent;
+                DialogResult res = AntdUI.Modal.open(new AntdUI.Modal.Config(frm, "成功", msg, AntdUI.TType.Success)
+                {
+                    Font = frm.Font,
+                    MaskClosable = maskClosable,
+                    CancelText = null,
+                });
+                return res;
+            }
+
+            /// <summary>
+            /// 警告提示窗
+            /// </summary>
+            /// <param name="parent">父窗体</param>
+            /// <param name="msg"></param>
+            /// <param name="maskClosable">点击蒙层是否允许关闭</param>
+            /// <returns></returns>
+            public static DialogResult ShowWarn(Form parent, string msg, bool maskClosable = true)
+            {
+                Form frm = parent;
+                DialogResult res = AntdUI.Modal.open(new AntdUI.Modal.Config(frm, "警告", msg, AntdUI.TType.Warn)
+                {
+                    Font = frm.Font,
+                    MaskClosable = maskClosable,
+                    CancelText = null,
+                });
+                return res;
+            }
+
+            /// <summary>
+            /// 错误提示窗
+            /// </summary>
+            /// <param name="parent">父窗体</param>
+            /// <param name="msg"></param>
+            /// <param name="maskClosable">点击蒙层是否允许关闭</param>
+            /// <returns></returns>
+            public static DialogResult ShowError(Form parent, string msg, bool maskClosable = true)
+            {
+                Form frm = parent;
+                DialogResult res = AntdUI.Modal.open(new AntdUI.Modal.Config(frm, "错误", msg, AntdUI.TType.Error)
+                {
+                    Font = frm.Font,
+                    MaskClosable = maskClosable,
+                    CancelText = null,
+                });
+                return res;
+            }
+
+            /// <summary>
+            /// 征询提示窗
+            /// </summary>
+            /// <param name="parent">父窗体</param>
+            /// <param name="msg"></param>
+            /// <returns></returns>
+            public static DialogResult ShowAsk(Form parent, string msg)
+            {
+                Form frm = parent;
+                DialogResult res = AntdUI.Modal.open(new AntdUI.Modal.Config(frm, "注意", msg, AntdUI.TType.Warn)
+                {
+                    Font = frm.Font,
+                    MaskClosable = false,
+                });
+                return res;
+            }
+        }
+
+        /// <summary>
+        /// 设置呼吸灯动效
+        /// </summary>
+        /// <param name="ctl"></param>
+        /// <param name="color1"></param>
+        /// <param name="color2"></param>
+        /// <param name="animationType"></param>
+        public static void SetBreathingLight(Control ctl, Color color1, Color color2, int animationType = 1)
+        {
+            AntdUI.Button? btn = null;
+
+            if (ctl is AntdUI.Button _btn)
+            {
+                btn = _btn;
+                if (btn.Type == AntdUI.TTypeMini.Default) return;
+            }
+
+            AntdUI.Label? lb = null;
+
+            if (ctl is AntdUI.Label _lb)
+            {
+                lb = _lb;
+            }
+
+            Random rnd = new();
+            int angle = 90;
+            if (color1 == Color.Empty) color1 = Color.FromArgb(rnd.Next(100, 200), rnd.Next(100, 200), rnd.Next(100, 200));
+            if (color2 == Color.Empty) color2 = Color.FromArgb(rnd.Next(100, 200), rnd.Next(100, 200), rnd.Next(100, 200));
+
+            if (btn != null)
+            {
+                btn.BackExtend = $"{angle},{ColorTranslator.ToHtml(color1)},{ColorTranslator.ToHtml(color2)}";
+            }
+            else if (lb != null)
+            {
+                lb.ColorExtend = $"{angle},{ColorTranslator.ToHtml(color1)},{ColorTranslator.ToHtml(color2)}";
+            }
+
+            int i = 0;
+            int ii = 1;
+
+            System.Windows.Forms.Timer timer = new() { Interval = 10 };
+
+            timer.Tick += (s, e) =>
+            {
+                i += ii;
+
+                if (i == 50) ii = -1;
+                if (i == -50) ii = 1;
+
+                Color color3 = color1;
+                Color color4 = color2;
+
+                int r, g, b;
+
+                if (animationType == 1)
+                {
+                    r = color1.R + i;
+                    if (r > 255) r = 255; else if (r < 0) r = 0;
+                    g = color1.G + i;
+                    if (g > 255) g = 255; else if (g < 0) g = 0;
+                    b = color1.B + i;
+                    if (b > 255) b = 255; else if (b < 0) b = 0;
+
+                    color3 = Color.FromArgb(r, g, b);
+
+                    r = color2.R + i;
+                    if (r > 255) r = 255; else if (r < 0) r = 0;
+                    g = color2.G + i;
+                    if (g > 255) g = 255; else if (g < 0) g = 0;
+                    b = color2.B + i;
+                    if (b > 255) b = 255; else if (b < 0) b = 0;
+
+                    color4 = Color.FromArgb(r, g, b);
+                }
+                else if (animationType == 2)
+                {
+                    r = color1.R + i;
+                    if (r > 255) r = 255; else if (r < 0) r = 0;
+                    g = color1.G;
+                    b = color2.B;
+
+                    color3 = Color.FromArgb(color1.R + i, color1.G, color1.B);
+
+                    r = color1.R;
+                    g = color1.G + i;
+                    if (g > 255) g = 255; else if (g < 0) g = 0;
+                    b = color2.B;
+
+                    color4 = Color.FromArgb(color2.R, color2.G + i, color2.B);
+                }
+
+                if (btn != null)
+                {
+                    btn.BackExtend = $"{angle},{ColorTranslator.ToHtml(color3)},{ColorTranslator.ToHtml(color4)}";
+                }
+                else if (lb != null)
+                {
+                    lb.ColorExtend = $"{angle},{ColorTranslator.ToHtml(color3)},{ColorTranslator.ToHtml(color4)}";
+                }
+            };
+            timer.Start();
         }
     }
 }

@@ -49,7 +49,6 @@
             // 
             // panelMain
             // 
-            panelMain.BackColor = Color.Transparent;
             panelMain.Controls.Add(panelTabs);
             panelMain.Controls.Add(panelMenu);
             panelMain.Dock = DockStyle.Fill;
@@ -63,6 +62,7 @@
             // 
             // panelTabs
             // 
+            panelTabs.BorderWidth = 1F;
             panelTabs.Controls.Add(tabs1);
             panelTabs.Dock = DockStyle.Fill;
             panelTabs.Location = new Point(265, 5);
@@ -77,9 +77,9 @@
             tabs1.Dock = DockStyle.Fill;
             tabs1.Font = new Font("微软雅黑", 9F);
             tabs1.Gap = 12;
-            tabs1.Location = new Point(2, 2);
+            tabs1.Location = new Point(3, 3);
             tabs1.Name = "tabs1";
-            tabs1.Size = new Size(494, 458);
+            tabs1.Size = new Size(492, 456);
             styleCard1.Closable = true;
             tabs1.Style = styleCard1;
             tabs1.TabIndex = 0;
@@ -87,10 +87,12 @@
             // 
             // panelMenu
             // 
+            panelMenu.BorderWidth = 1F;
             panelMenu.Controls.Add(tlpMenu);
             panelMenu.Dock = DockStyle.Left;
             panelMenu.Location = new Point(5, 5);
             panelMenu.Name = "panelMenu";
+            panelMenu.padding = new Padding(0, 0, 5, 0);
             panelMenu.Padding = new Padding(5);
             panelMenu.Shadow = 2;
             panelMenu.Size = new Size(260, 462);
@@ -105,13 +107,13 @@
             tlpMenu.Controls.Add(panelMenuHeader, 0, 0);
             tlpMenu.Controls.Add(divider1, 0, 1);
             tlpMenu.Dock = DockStyle.Fill;
-            tlpMenu.Location = new Point(7, 7);
+            tlpMenu.Location = new Point(8, 8);
             tlpMenu.Name = "tlpMenu";
             tlpMenu.RowCount = 3;
             tlpMenu.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             tlpMenu.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tlpMenu.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tlpMenu.Size = new Size(246, 448);
+            tlpMenu.Size = new Size(244, 446);
             tlpMenu.TabIndex = 2;
             // 
             // menu1
@@ -122,7 +124,7 @@
             menu1.Location = new Point(3, 73);
             menu1.Name = "menu1";
             menu1.ShowSubBack = true;
-            menu1.Size = new Size(240, 372);
+            menu1.Size = new Size(238, 370);
             menu1.TabIndex = 0;
             menu1.Text = "menu1";
             // 
@@ -133,7 +135,7 @@
             panelMenuHeader.Dock = DockStyle.Fill;
             panelMenuHeader.Location = new Point(3, 3);
             panelMenuHeader.Name = "panelMenuHeader";
-            panelMenuHeader.Size = new Size(240, 44);
+            panelMenuHeader.Size = new Size(238, 44);
             panelMenuHeader.TabIndex = 1;
             panelMenuHeader.Text = "panel1";
             // 
@@ -146,7 +148,7 @@
             inputMenuSearch.Name = "inputMenuSearch";
             inputMenuSearch.PlaceholderText = "搜索菜单";
             inputMenuSearch.PrefixSvg = "SearchOutlined";
-            inputMenuSearch.Size = new Size(190, 44);
+            inputMenuSearch.Size = new Size(188, 44);
             inputMenuSearch.SuffixSvg = "";
             inputMenuSearch.TabIndex = 1;
             // 
@@ -165,7 +167,7 @@
             divider1.Dock = DockStyle.Fill;
             divider1.Location = new Point(3, 53);
             divider1.Name = "divider1";
-            divider1.Size = new Size(240, 14);
+            divider1.Size = new Size(238, 14);
             divider1.TabIndex = 2;
             // 
             // tipB
