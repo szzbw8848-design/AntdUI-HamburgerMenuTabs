@@ -139,13 +139,13 @@
                     MenuCollapsedAll(null);
                     inputMenuSearch.Visible = false;
                     menu1.Collapsed = true;
-                    panelMenu.Width = 70;
+                    panelMenu.Width = (int)((40 + 12) * AntdUI.Config.Dpi);
                 }
                 else
                 {
                     inputMenuSearch.Visible = true;
                     menu1.Collapsed = false;
-                    panelMenu.Width = 260;
+                    panelMenu.Width = (int)(210 * AntdUI.Config.Dpi);
                 }
             };
 

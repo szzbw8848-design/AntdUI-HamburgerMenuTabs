@@ -28,24 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            windowBar1 = new AntdUI.WindowBar();
+            winBar = new AntdUI.PageHeader();
             btnTheme = new AntdUI.Button();
             btnFullScreen = new AntdUI.Button();
             panelMain = new AntdUI.Panel();
             tipB = new AntdUI.TooltipComponent();
-            windowBar1.SuspendLayout();
+            winBar.SuspendLayout();
             SuspendLayout();
             // 
-            // windowBar1
+            // winBar
             // 
-            windowBar1.Controls.Add(btnTheme);
-            windowBar1.Controls.Add(btnFullScreen);
-            windowBar1.Dock = DockStyle.Top;
-            windowBar1.Location = new Point(0, 0);
-            windowBar1.Name = "windowBar1";
-            windowBar1.Size = new Size(800, 40);
-            windowBar1.TabIndex = 0;
-            windowBar1.Text = "windowBar1";
+            winBar.Controls.Add(btnTheme);
+            winBar.Controls.Add(btnFullScreen);
+            winBar.Dock = DockStyle.Top;
+            winBar.Location = new Point(0, 0);
+            winBar.Name = "winBar";
+            winBar.ShowButton = true;
+            winBar.ShowIcon = true;
+            winBar.Size = new Size(800, 40);
+            winBar.TabIndex = 0;
             // 
             // btnTheme
             // 
@@ -72,9 +73,9 @@
             panelMain.Dock = DockStyle.Fill;
             panelMain.Location = new Point(0, 40);
             panelMain.Name = "panelMain";
+            panelMain.Radius = 0;
             panelMain.Size = new Size(800, 410);
             panelMain.TabIndex = 1;
-            panelMain.Text = "panel1";
             // 
             // tipB
             // 
@@ -84,21 +85,19 @@
             // 
             // FrmMain
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
-            AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(panelMain);
-            Controls.Add(windowBar1);
+            Controls.Add(winBar);
             Font = new Font("微软雅黑", 9F);
             Name = "FrmMain";
             Text = "Form1";
-            windowBar1.ResumeLayout(false);
+            winBar.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private AntdUI.WindowBar windowBar1;
+        private AntdUI.PageHeader winBar;
         private AntdUI.Panel panelMain;
         private AntdUI.Button btnFullScreen;
         private AntdUI.TooltipComponent tipB;

@@ -16,8 +16,8 @@ namespace AntdUI_HamburgerMenuTabs
 
             Helpers.Antd.SetTheme(this, btnTheme);
 
-            windowBar1.Text = $"汉堡包菜单 + 多标签页面";
-            windowBar1.SubText = "演示";
+            winBar.Text = $"汉堡包菜单 + 多标签页面";
+            winBar.SubText = "演示";
 
             tipB.SetTip(btnFullScreen, "全屏显示 (F11)");
             btnFullScreen.Click += (s, e) =>
@@ -65,7 +65,7 @@ namespace AntdUI_HamburgerMenuTabs
                     Padding = new(15, 15),
                 });
             };
-            windowBar1.Controls.Add(btnPanelBackColorSwitch);
+            winBar.Controls.Add(btnPanelBackColorSwitch);
             btnPanelBackColorSwitch.BringToFront();
             #endregion
         }

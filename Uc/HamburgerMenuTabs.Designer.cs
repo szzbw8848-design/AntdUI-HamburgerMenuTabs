@@ -29,57 +29,25 @@
         private void InitializeComponent()
         {
             AntdUI.Tabs.StyleCard styleCard1 = new AntdUI.Tabs.StyleCard();
-            panelMain = new AntdUI.Panel();
-            panelTabs = new AntdUI.Panel();
             tabs1 = new AntdUI.Tabs();
             panelMenu = new AntdUI.Panel();
-            tlpMenu = new TableLayoutPanel();
             menu1 = new AntdUI.Menu();
+            divider1 = new AntdUI.Divider();
             panelMenuHeader = new AntdUI.Panel();
             inputMenuSearch = new AntdUI.Input();
             btnMenuCollapsed = new AntdUI.Button();
-            divider1 = new AntdUI.Divider();
             tipB = new AntdUI.TooltipComponent();
-            panelMain.SuspendLayout();
-            panelTabs.SuspendLayout();
             panelMenu.SuspendLayout();
-            tlpMenu.SuspendLayout();
             panelMenuHeader.SuspendLayout();
             SuspendLayout();
-            // 
-            // panelMain
-            // 
-            panelMain.Controls.Add(panelTabs);
-            panelMain.Controls.Add(panelMenu);
-            panelMain.Dock = DockStyle.Fill;
-            panelMain.Font = new Font("微软雅黑", 9F);
-            panelMain.Location = new Point(0, 0);
-            panelMain.Name = "panelMain";
-            panelMain.Padding = new Padding(5);
-            panelMain.Size = new Size(768, 472);
-            panelMain.TabIndex = 3;
-            panelMain.Text = "panel1";
-            // 
-            // panelTabs
-            // 
-            panelTabs.BorderWidth = 1F;
-            panelTabs.Controls.Add(tabs1);
-            panelTabs.Dock = DockStyle.Fill;
-            panelTabs.Location = new Point(265, 5);
-            panelTabs.Name = "panelTabs";
-            panelTabs.Shadow = 2;
-            panelTabs.Size = new Size(498, 462);
-            panelTabs.TabIndex = 1;
-            panelTabs.Text = "panel1";
             // 
             // tabs1
             // 
             tabs1.Dock = DockStyle.Fill;
-            tabs1.Font = new Font("微软雅黑", 9F);
             tabs1.Gap = 12;
-            tabs1.Location = new Point(3, 3);
+            tabs1.Location = new Point(215, 5);
             tabs1.Name = "tabs1";
-            tabs1.Size = new Size(492, 456);
+            tabs1.Size = new Size(548, 462);
             styleCard1.Closable = true;
             tabs1.Style = styleCard1;
             tabs1.TabIndex = 0;
@@ -88,67 +56,56 @@
             // panelMenu
             // 
             panelMenu.BorderWidth = 1F;
-            panelMenu.Controls.Add(tlpMenu);
+            panelMenu.Controls.Add(menu1);
+            panelMenu.Controls.Add(divider1);
+            panelMenu.Controls.Add(panelMenuHeader);
             panelMenu.Dock = DockStyle.Left;
             panelMenu.Location = new Point(5, 5);
             panelMenu.Name = "panelMenu";
-            panelMenu.padding = new Padding(0, 0, 5, 0);
             panelMenu.Padding = new Padding(5);
-            panelMenu.Shadow = 2;
-            panelMenu.Size = new Size(260, 462);
+            panelMenu.Size = new Size(210, 462);
             panelMenu.TabIndex = 0;
-            panelMenu.Text = "panel1";
-            // 
-            // tlpMenu
-            // 
-            tlpMenu.ColumnCount = 1;
-            tlpMenu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tlpMenu.Controls.Add(menu1, 0, 2);
-            tlpMenu.Controls.Add(panelMenuHeader, 0, 0);
-            tlpMenu.Controls.Add(divider1, 0, 1);
-            tlpMenu.Dock = DockStyle.Fill;
-            tlpMenu.Location = new Point(8, 8);
-            tlpMenu.Name = "tlpMenu";
-            tlpMenu.RowCount = 3;
-            tlpMenu.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tlpMenu.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tlpMenu.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tlpMenu.Size = new Size(244, 446);
-            tlpMenu.TabIndex = 2;
             // 
             // menu1
             // 
             menu1.AutoCollapse = true;
             menu1.Dock = DockStyle.Fill;
             menu1.Indent = true;
-            menu1.Location = new Point(3, 73);
+            menu1.Location = new Point(6, 56);
             menu1.Name = "menu1";
             menu1.ShowSubBack = true;
-            menu1.Size = new Size(238, 370);
-            menu1.TabIndex = 0;
-            menu1.Text = "menu1";
+            menu1.Size = new Size(198, 400);
+            menu1.TabIndex = 1;
+            // 
+            // divider1
+            // 
+            divider1.Dock = DockStyle.Top;
+            divider1.Location = new Point(6, 46);
+            divider1.Name = "divider1";
+            divider1.Size = new Size(198, 10);
+            divider1.TabIndex = 0;
             // 
             // panelMenuHeader
             // 
             panelMenuHeader.Controls.Add(inputMenuSearch);
             panelMenuHeader.Controls.Add(btnMenuCollapsed);
-            panelMenuHeader.Dock = DockStyle.Fill;
-            panelMenuHeader.Location = new Point(3, 3);
+            panelMenuHeader.Dock = DockStyle.Top;
+            panelMenuHeader.Location = new Point(6, 6);
             panelMenuHeader.Name = "panelMenuHeader";
-            panelMenuHeader.Size = new Size(238, 44);
+            panelMenuHeader.Radius = 0;
+            panelMenuHeader.Size = new Size(198, 40);
             panelMenuHeader.TabIndex = 1;
-            panelMenuHeader.Text = "panel1";
             // 
             // inputMenuSearch
             // 
             inputMenuSearch.AllowClear = true;
             inputMenuSearch.Dock = DockStyle.Fill;
             inputMenuSearch.IconRatio = 1F;
-            inputMenuSearch.Location = new Point(50, 0);
+            inputMenuSearch.Location = new Point(40, 0);
             inputMenuSearch.Name = "inputMenuSearch";
             inputMenuSearch.PlaceholderText = "搜索菜单";
             inputMenuSearch.PrefixSvg = "SearchOutlined";
-            inputMenuSearch.Size = new Size(188, 44);
+            inputMenuSearch.Size = new Size(158, 40);
             inputMenuSearch.SuffixSvg = "";
             inputMenuSearch.TabIndex = 1;
             // 
@@ -159,16 +116,8 @@
             btnMenuCollapsed.IconSvg = "MenuOutlined";
             btnMenuCollapsed.Location = new Point(0, 0);
             btnMenuCollapsed.Name = "btnMenuCollapsed";
-            btnMenuCollapsed.Size = new Size(50, 44);
+            btnMenuCollapsed.Size = new Size(40, 40);
             btnMenuCollapsed.TabIndex = 0;
-            // 
-            // divider1
-            // 
-            divider1.Dock = DockStyle.Fill;
-            divider1.Location = new Point(3, 53);
-            divider1.Name = "divider1";
-            divider1.Size = new Size(238, 14);
-            divider1.TabIndex = 2;
             // 
             // tipB
             // 
@@ -176,26 +125,20 @@
             // 
             // HamburgerMenuTabs
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
-            AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(panelMain);
+            Controls.Add(tabs1);
+            Controls.Add(panelMenu);
+            Font = new Font("微软雅黑", 9F);
             Name = "HamburgerMenuTabs";
+            Padding = new Padding(5);
             Size = new Size(768, 472);
-            panelMain.ResumeLayout(false);
-            panelTabs.ResumeLayout(false);
             panelMenu.ResumeLayout(false);
-            tlpMenu.ResumeLayout(false);
             panelMenuHeader.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private AntdUI.Panel panelMain;
-        private AntdUI.Panel panelTabs;
         private AntdUI.Tabs tabs1;
         private AntdUI.Panel panelMenu;
-        private TableLayoutPanel tlpMenu;
         private AntdUI.Menu menu1;
         private AntdUI.Panel panelMenuHeader;
         private AntdUI.Input inputMenuSearch;

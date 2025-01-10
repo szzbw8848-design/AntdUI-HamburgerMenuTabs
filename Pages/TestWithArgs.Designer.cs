@@ -29,13 +29,10 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             SuspendLayout();
             // 
             // TestWithArgs
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
-            AutoScaleMode = AutoScaleMode.Font;
             Name = "TestWithArgs";
             Size = new Size(585, 333);
             ResumeLayout(false);

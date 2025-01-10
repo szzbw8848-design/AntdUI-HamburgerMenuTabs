@@ -104,8 +104,6 @@
             // 
             // Home
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
-            AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panelMain);
             Font = new Font("微软雅黑", 9F);
             Name = "Home";
