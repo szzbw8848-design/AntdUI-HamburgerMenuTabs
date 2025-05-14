@@ -68,7 +68,6 @@
             // 
             // menu1
             // 
-            menu1.AutoCollapse = true;
             menu1.Dock = DockStyle.Fill;
             menu1.Indent = true;
             menu1.Location = new Point(6, 56);

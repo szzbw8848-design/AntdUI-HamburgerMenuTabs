@@ -46,6 +46,7 @@
             panelMain.Dock = DockStyle.Fill;
             panelMain.Location = new Point(0, 0);
             panelMain.Name = "panelMain";
+            panelMain.Radius = 0;
             panelMain.Size = new Size(585, 333);
             panelMain.TabIndex = 0;
             panelMain.Text = "panel1";

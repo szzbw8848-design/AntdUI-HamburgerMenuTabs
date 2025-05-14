@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             winBar = new AntdUI.PageHeader();
+            colorTheme = new AntdUI.ColorPicker();
             btnTheme = new AntdUI.Button();
             btnFullScreen = new AntdUI.Button();
             panelMain = new AntdUI.Panel();
@@ -38,6 +39,7 @@
             // 
             // winBar
             // 
+            winBar.Controls.Add(colorTheme);
             winBar.Controls.Add(btnTheme);
             winBar.Controls.Add(btnFullScreen);
             winBar.Dock = DockStyle.Top;
@@ -47,6 +49,19 @@
             winBar.ShowIcon = true;
             winBar.Size = new Size(800, 40);
             winBar.TabIndex = 0;
+            // 
+            // colorTheme
+            // 
+            colorTheme.Dock = DockStyle.Right;
+            colorTheme.Location = new Point(488, 0);
+            colorTheme.Name = "colorTheme";
+            colorTheme.Padding = new Padding(8);
+            colorTheme.Round = true;
+            colorTheme.ShowClose = true;
+            colorTheme.Size = new Size(40, 40);
+            colorTheme.TabIndex = 5;
+            colorTheme.Value = Color.FromArgb(22, 119, 255);
+            colorTheme.WaveSize = 0;
             // 
             // btnTheme
             // 
@@ -102,5 +117,6 @@
         private AntdUI.Button btnFullScreen;
         private AntdUI.TooltipComponent tipB;
         private AntdUI.Button btnTheme;
+        private AntdUI.ColorPicker colorTheme;
     }
 }

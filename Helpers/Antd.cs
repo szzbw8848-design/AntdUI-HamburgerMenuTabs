@@ -1,53 +1,35 @@
 ﻿namespace AntdUI_HamburgerMenuTabs.Helpers
 {
+    /// <summary>
+    /// AntdUI 帮助类
+    /// 版本：2025.04.21.01
+    /// </summary>
     public class Antd
     {
         readonly static HashSet<AntdUI.Window> subWindows = [];
 
         /// <summary>
-        /// 设置主题
+        /// 设置主题（读取用户配置）
         /// </summary>
         /// <param name="window"></param>
         /// <param name="btnSwitch"></param>
-        public static void SetTheme(AntdUI.Window window, AntdUI.Button? btnSwitch)
+        public static void ReadTheme(AntdUI.Window window, AntdUI.Button? btnSwitch, AntdUI.ColorPicker? colorTheme)
         {
             bool dark = Properties.Settings.Default.ThemeDark;
+            SetTheme(window, btnSwitch, dark);
             Color primary = Properties.Settings.Default.ThemeColor;
-            AntdUI.Config.IsDark = dark;
-            if (dark)
-            {
-                if (btnSwitch != null) btnSwitch.IconSvg = "MoonFilled";
-                window.BackColor = Color.Black;
-                window.ForeColor = Color.White;
-            }
-            else
-            {
-                if (btnSwitch != null) btnSwitch.IconSvg = "SunOutlined";
-                window.BackColor = Color.White;
-                window.ForeColor = Color.Black;
-            }
             AntdUI.Style.SetPrimary(primary);
+            if (colorTheme != null) colorTheme.Value = primary;
+            window.Refresh();
         }
 
         /// <summary>
-        /// 设置主题
+        /// 设置主题和主题色，并保存用户配置
         /// </summary>
         /// <param name="dark"></param>
-        public static void SetTheme(AntdUI.Window window, AntdUI.Button? btnSwitch, bool dark, Color primary)
+        public static void SetThemeAndSave(AntdUI.Window window, AntdUI.Button? btnSwitch, bool dark, Color primary)
         {
-            AntdUI.Config.IsDark = dark;
-            if (dark)
-            {
-                if (btnSwitch != null) btnSwitch.IconSvg = "MoonFilled";
-                window.BackColor = Color.Black;
-                window.ForeColor = Color.White;
-            }
-            else
-            {
-                if (btnSwitch != null) btnSwitch.IconSvg = "SunOutlined";
-                window.BackColor = Color.White;
-                window.ForeColor = Color.Black;
-            }
+            SetTheme(window, btnSwitch, dark);
             AntdUI.Style.SetPrimary(primary);
             window.Refresh();
             BroadcastThemeToSubWindows();
@@ -57,15 +39,55 @@
         }
 
         /// <summary>
-        /// 设置主题色
+        /// 设置主题
+        /// </summary>
+        /// <param name="window"></param>
+        /// <param name="btnSwitch"></param>
+        /// <param name="dark"></param>
+        public static void SetTheme(AntdUI.Window window, AntdUI.Button? btnSwitch, bool dark)
+        {
+            AntdUI.Config.IsDark = dark;
+            if (dark)
+            {
+                if (btnSwitch != null) btnSwitch.IconSvg = "MoonFilled";
+                window.BackColor = Color.FromArgb(20, 20, 20);
+                window.ForeColor = Color.FromArgb(241, 241, 241);
+            }
+            else
+            {
+                if (btnSwitch != null) btnSwitch.IconSvg = "SunOutlined";
+                window.BackColor = Color.White;
+                window.ForeColor = Color.FromArgb(20, 20, 20);
+            }
+        }
+
+        /// <summary>
+        /// 设置主题色，并保存用户配置
         /// </summary>
         /// <param name="primary"></param>
-        public static void SetThemeColor(AntdUI.Window window, Color primary)
+        public static void SetThemeColorAndSave(AntdUI.Window window, Color primary)
         {
             AntdUI.Style.SetPrimary(primary);
             window.Refresh();
             BroadcastThemeToSubWindows();
             Properties.Settings.Default.ThemeColor = primary;
+            Properties.Settings.Default.Save();
+        }
+
+        /// <summary>
+        /// 切换明暗主题
+        /// </summary>
+        /// <param name="window"></param>
+        /// <param name="btnSwitch"></param>
+        public static void SwitchTheme(AntdUI.Window window, AntdUI.Button? btnSwitch)
+        {
+            bool dark = !AntdUI.Config.IsDark;
+            SetTheme(window, btnSwitch, dark);
+            Color primary = Properties.Settings.Default.ThemeColor;
+            AntdUI.Style.SetPrimary(primary);
+            window.Refresh();
+            BroadcastThemeToSubWindows();
+            Properties.Settings.Default.ThemeDark = dark;
             Properties.Settings.Default.Save();
         }
 
@@ -163,7 +185,7 @@
             /// <param name="msg"></param>
             /// <param name="maskClosable">点击蒙层是否允许关闭</param>
             /// <returns></returns>
-            public static DialogResult ShowWarn(Form parent, string msg, bool maskClosable = true)
+            public static DialogResult ShowWarn(Form parent, string msg, bool maskClosable = false)
             {
                 Form frm = parent;
                 DialogResult res = AntdUI.Modal.open(new AntdUI.Modal.Config(frm, "警告", msg, AntdUI.TType.Warn)
@@ -182,7 +204,7 @@
             /// <param name="msg"></param>
             /// <param name="maskClosable">点击蒙层是否允许关闭</param>
             /// <returns></returns>
-            public static DialogResult ShowError(Form parent, string msg, bool maskClosable = true)
+            public static DialogResult ShowError(Form parent, string msg, bool maskClosable = false)
             {
                 Form frm = parent;
                 DialogResult res = AntdUI.Modal.open(new AntdUI.Modal.Config(frm, "错误", msg, AntdUI.TType.Error)
@@ -195,7 +217,7 @@
             }
 
             /// <summary>
-            /// 征询提示窗
+            /// 选择提示窗
             /// </summary>
             /// <param name="parent">父窗体</param>
             /// <param name="msg"></param>
@@ -203,7 +225,7 @@
             public static DialogResult ShowAsk(Form parent, string msg)
             {
                 Form frm = parent;
-                DialogResult res = AntdUI.Modal.open(new AntdUI.Modal.Config(frm, "注意", msg, AntdUI.TType.Warn)
+                DialogResult res = AntdUI.Modal.open(new AntdUI.Modal.Config(frm, "提示", msg, AntdUI.TType.Warn)
                 {
                     Font = frm.Font,
                     MaskClosable = false,
@@ -236,6 +258,15 @@
                 lb = _lb;
             }
 
+            AntdUI.PageHeader? ph = null;
+
+            if (ctl is AntdUI.PageHeader _ph)
+            {
+                ph = _ph;
+            }
+
+            if (btn == null && lb == null && ph == null) throw new Exception("控件类型不支持！");
+
             Random rnd = new();
             int angle = 90;
             if (color1 == Color.Empty) color1 = Color.FromArgb(rnd.Next(100, 200), rnd.Next(100, 200), rnd.Next(100, 200));
@@ -248,6 +279,10 @@
             else if (lb != null)
             {
                 lb.ColorExtend = $"{angle},{ColorTranslator.ToHtml(color1)},{ColorTranslator.ToHtml(color2)}";
+            }
+            if (ph != null)
+            {
+                ph.BackExtend = $"{angle},{ColorTranslator.ToHtml(color1)},{ColorTranslator.ToHtml(color2)}";
             }
 
             int i = 0;
@@ -311,6 +346,10 @@
                 else if (lb != null)
                 {
                     lb.ColorExtend = $"{angle},{ColorTranslator.ToHtml(color3)},{ColorTranslator.ToHtml(color4)}";
+                }
+                else if (ph != null)
+                {
+                    ph.BackExtend = $"{angle},{ColorTranslator.ToHtml(color3)},{ColorTranslator.ToHtml(color4)}";
                 }
             };
             timer.Start();
