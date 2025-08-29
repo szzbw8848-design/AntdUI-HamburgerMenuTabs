@@ -30,8 +30,8 @@
 
         private void GenerateRandomCode()
         {
-            HashSet<string> res = [];
-            Random random = new();
+            HashSet<string> res = new HashSet<string>();
+            Random random = new Random();
             DateTime dtStart = DateTime.Now;
             int timesTotal = 0;
             int timesIgnore = 0;

@@ -20,52 +20,36 @@
         /// <param name="code"></param>
         /// <param name="name"></param>
         /// <param name="iconSvg"></param>
-        public class MyMenuItem(string code, string name, string? iconSvg)
+        public class MyMenuItem
         {
-            /// <summary>
-            /// 菜单项唯一编码
-            /// </summary>
-            public string Code { get; set; } = code;
-
-            /// <summary>
-            /// 菜单项显示名称
-            /// </summary>
-            public string Name { get; set; } = name;
-
-            /// <summary>
-            /// Svg 图标
-            /// </summary>
-            public string? IconSvg { get; set; } = iconSvg;
-
-            /// <summary>
-            /// 菜单项绑定的用户控件 typeof(UserControl)
-            /// </summary>
-            public Type? PageType { get; set; }
-
-            /// <summary>
-            /// 是否允许关闭页面
-            /// </summary>
+            public MyMenuItem(string code, string name, string iconSvg)
+            {
+                this.Code = code;
+                this.Name = name;
+                this.IconSvg = iconSvg;
+                this.Sub = new List<MyMenuItem>();
+            }
+            public string Code { get; set; }
+            public string Name { get; set; }
+            public string IconSvg { get; set; }
+            public Type PageType { get; set; }
             public bool Closeable { get; set; } = true;
-
-            /// <summary>
-            /// 子菜单集合
-            /// </summary>
-            public List<MyMenuItem> Sub { get; set; } = [];
+            public List<MyMenuItem> Sub { get; set; }
         }
 
         /// <summary>
         /// 主菜单
         /// </summary>
-        private List<MyMenuItem> _menus = [];
+        private List<MyMenuItem> _menus = new List<MyMenuItem>();
 
-        private readonly HashSet<string> menuCodes = [];
+        private readonly HashSet<string> menuCodes = new HashSet<string>();
 
         /// <summary>
         /// 创建菜单
         /// </summary>
         /// <param name="parent1"></param>
         /// <param name="parent2"></param>
-        private void CreateMenu(MyMenuItem? parent1, AntdUI.MenuItem? parent2)
+        private void CreateMenu(MyMenuItem parent1, AntdUI.MenuItem parent2)
         {
             List<MyMenuItem> _menus;
 
@@ -112,7 +96,7 @@
         /// 设置菜单项
         /// </summary>
         /// <param name="menus"></param>
-        public void SetMenu(List<MyMenuItem>? menus)
+        public void SetMenu(List<MyMenuItem> menus)
         {
             if (menus != null) _menus = menus;
             menu1.Items.Clear();
@@ -541,7 +525,7 @@
 
             if (!findInstance)
             {
-                AntdUI.TabPage page = new()
+                AntdUI.TabPage page = new AntdUI.TabPage()
                 {
                     Text = title,
                     IconSvg = svg,
@@ -559,24 +543,24 @@
                     }
                 };
 
-                AntdUI.Panel panel = new()
+                AntdUI.Panel panel = new AntdUI.Panel()
                 {
                     Dock = DockStyle.Fill,
-                    Padding = new(2),
+                    Padding = new Padding(2),
                 };
                 page.Controls.Add(panel);
 
                 if (pageType != null)
                 {
-                    object[] args = [title, path, path2];
+                    object[] args = new object[]{title, path, path2};
                     UserControl pageContent;
                     try
                     {
-                        pageContent = (UserControl)Activator.CreateInstance(pageType, args)!;
+                        pageContent = (UserControl)Activator.CreateInstance(pageType, args);
                     }
                     catch
                     {
-                        pageContent = (UserControl)Activator.CreateInstance(pageType)!;
+                        pageContent = (UserControl)Activator.CreateInstance(pageType);
                     }
                     pageContent.Dock = DockStyle.Fill;
                     panel.Controls.Add(pageContent);

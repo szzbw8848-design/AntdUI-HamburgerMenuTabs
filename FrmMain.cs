@@ -4,14 +4,14 @@ namespace AntdUI_HamburgerMenuTabs
 {
     public partial class FrmMain : AntdUI.Window
     {
-        private Uc.HamburgerMenuTabs hmt = new();
+        private Uc.HamburgerMenuTabs hmt = new Uc.HamburgerMenuTabs();
 
         public FrmMain()
         {
             InitializeComponent();
 
             Text = Common.App.AppName;
-            Size = new(1024, 576);
+            Size = new System.Drawing.Size(1024, 576);
             StartPosition = FormStartPosition.CenterScreen;
 
             Helpers.Antd.ReadTheme(this, btnTheme, colorTheme);
@@ -19,13 +19,13 @@ namespace AntdUI_HamburgerMenuTabs
             winBar.Text = Common.App.AppName;
             winBar.SubText = $"{Common.App.AppAuthor} | V{Common.App.AppVersion}";
 
-            tipB.SetTip(btnFullScreen, "È«ÆÁÏÔÊ¾ (F11)");
+            tipB.SetTip(btnFullScreen, "È«ï¿½ï¿½ï¿½ï¿½Ê¾ (F11)");
             btnFullScreen.Click += (s, e) =>
             {
                 ShowFullScreen();
             };
 
-            tipB.SetTip(btnTheme, "ÇÐ»»Ö÷Ìâ");
+            tipB.SetTip(btnTheme, "ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½");
             btnTheme.Click += (s, e) =>
             {
                 Helpers.Antd.SwitchTheme(this, btnTheme);
@@ -35,7 +35,7 @@ namespace AntdUI_HamburgerMenuTabs
             {
                 Helpers.Antd.SetThemeColorAndSave(this, colorTheme.Value);
             };
-            tipB.SetTip(colorTheme, "Ö÷ÌâÉ«");
+            tipB.SetTip(colorTheme, "ï¿½ï¿½ï¿½ï¿½É«");
 
             hmt.Dock = DockStyle.Fill;
             panelMain.Controls.Add(hmt);
@@ -43,7 +43,7 @@ namespace AntdUI_HamburgerMenuTabs
         }
 
         /// <summary>
-        /// È«¾Ö¿ì½Ý¼ü
+        /// È«ï¿½Ö¿ï¿½Ý¼ï¿½
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="keyData"></param>
@@ -60,104 +60,104 @@ namespace AntdUI_HamburgerMenuTabs
         }
 
         /// <summary>
-        /// ³õÊ¼»¯ºº±¤°ü²Ëµ¥
+        /// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½
         /// </summary>
         private void InitHamburgerMenuTabs()
         {
-            List<MyMenuItem> menus = [
-                new MyMenuItem("Home", "Ö÷Ò³", "HomeFilled")
+            List<MyMenuItem> menus = new List<MyMenuItem>{
+                new MyMenuItem("Home", "ï¿½ï¿½Ò³", "HomeFilled")
                 {
                     PageType = typeof(Pages.Home),
                     Closeable = false,
                 },
-                new MyMenuItem("Tools", "¹¤¾ß", "ToolFilled")
+                new MyMenuItem("Tools", "ï¿½ï¿½ï¿½ï¿½", "ToolFilled")
                 {
-                    Sub = [
-                        new MyMenuItem("ToolsPerformanceMonitor", "ÐÔÄÜ¼àÊÓÆ÷", null)
+                    Sub = new List<MyMenuItem>{
+                        new MyMenuItem("ToolsPerformanceMonitor", "ï¿½ï¿½ï¿½Ü¼ï¿½ï¿½ï¿½ï¿½ï¿½", null)
                         {
                             PageType = typeof(Pages.Tools.PerformanceMonitor),
                         },
-                        new MyMenuItem("ToolsRandomCode", "Ëæ»ú±àÂëÉú³ÉÆ÷", null)
+                        new MyMenuItem("ToolsRandomCode", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", null)
                         {
                             PageType = typeof(Pages.Tools.RandomCode),
                         },
-                    ],
+                    },
                 },
-                new MyMenuItem("Demo", "ÑÝÊ¾", "GithubFilled")
+                new MyMenuItem("Demo", "ï¿½ï¿½Ê¾", "GithubFilled")
                 {
-                    Sub = [
-                        new MyMenuItem("DemoGridPanel", "GridPanel ¸ñÕ¤²¼¾Ö", null)
+                    Sub = new List<MyMenuItem>{
+                        new MyMenuItem("DemoGridPanel", "GridPanel ï¿½ï¿½Õ¤ï¿½ï¿½ï¿½ï¿½", null)
                         {
                             PageType = typeof(Pages.Demo.GridPanel),
                         },
-                        new MyMenuItem("DemoTable", "Table ±í¸ñ", null)
+                        new MyMenuItem("DemoTable", "Table ï¿½ï¿½ï¿½ï¿½", null)
                         {
                             PageType = typeof(Pages.Demo.Table),
                         },
-                        new MyMenuItem("DemoTour", "Tour Òýµ¼", null)
+                        new MyMenuItem("DemoTour", "Tour ï¿½ï¿½ï¿½ï¿½", null)
                         {
                             PageType = typeof(Pages.Demo.Tour),
                         },
-                        new MyMenuItem("DemoTree", "Tree Ê÷ÐÎ¿Ø¼þ", null)
+                        new MyMenuItem("DemoTree", "Tree ï¿½ï¿½ï¿½Î¿Ø¼ï¿½", null)
                         {
                             PageType = typeof(Pages.Demo.Tree),
                         },
-                    ],
+                    },
                 },
-                new MyMenuItem("menu.1", "²Ëµ¥ 1", "ProductFilled")
+                new MyMenuItem("menu.1", "ï¿½Ëµï¿½ 1", "ProductFilled")
                 {
                     PageType = typeof(Pages.TestWithArgs),
                 },
-                new MyMenuItem("menu.2", "²Ëµ¥ 2", "ProductFilled")
+                new MyMenuItem("menu.2", "ï¿½Ëµï¿½ 2", "ProductFilled")
                 {
-                    Sub = [
-                        new MyMenuItem("menu.2.1", "²Ëµ¥ 2.1", null)
+                    Sub = new List<MyMenuItem>{
+                        new MyMenuItem("menu.2.1", "ï¿½Ëµï¿½ 2.1", null)
                         {
                             PageType = typeof(Pages.TestWithArgs),
                         },
-                        new MyMenuItem("menu.2.2", "²Ëµ¥ 2.2", null)
+                        new MyMenuItem("menu.2.2", "ï¿½Ëµï¿½ 2.2", null)
                         {
                             PageType = typeof(Pages.TestWithArgs),
                         },
-                    ],
+                    },
                 },
-                new MyMenuItem("menu.3", "²Ëµ¥ 3", "ProductFilled")
+                new MyMenuItem("menu.3", "ï¿½Ëµï¿½ 3", "ProductFilled")
                 {
-                    Sub = [
-                        new MyMenuItem("menu.3.1", "²Ëµ¥ 3.1", null)
+                    Sub = new List<MyMenuItem>{
+                        new MyMenuItem("menu.3.1", "ï¿½Ëµï¿½ 3.1", null)
                         {
                             PageType = typeof(Pages.TestWithArgs),
                         },
-                        new MyMenuItem("menu.3.2", "²Ëµ¥ 3.2", null)
+                        new MyMenuItem("menu.3.2", "ï¿½Ëµï¿½ 3.2", null)
                         {
-                            Sub = [
-                                new MyMenuItem("menu.3.2.1", "²Ëµ¥ 3.2.1", null)
+                            Sub = new List<MyMenuItem>{
+                                new MyMenuItem("menu.3.2.1", "ï¿½Ëµï¿½ 3.2.1", null)
                                 {
                                     PageType = typeof(Pages.TestWithArgs),
                                 },
-                                new MyMenuItem("menu.3.2.2", "²Ëµ¥ 3.2.2", null)
+                                new MyMenuItem("menu.3.2.2", "ï¿½Ëµï¿½ 3.2.2", null)
                                 {
 
                                 },
-                            ],
+                            },
                         },
-                        new MyMenuItem("menu.3.3", "²Ëµ¥ 3.3", null)
+                        new MyMenuItem("menu.3.3", "ï¿½Ëµï¿½ 3.3", null)
                         {
-                            Sub = [
-                                new MyMenuItem("menu.3.3.1", "²Ëµ¥ 3.3.1", null)
+                            Sub = new List<MyMenuItem>{
+                                new MyMenuItem("menu.3.3.1", "ï¿½Ëµï¿½ 3.3.1", null)
                                 {
-                                    Sub = [
-                                        new MyMenuItem("menu.3.3.1.1", "²Ëµ¥ 3.3.1.1", null)
+                                    Sub = new List<MyMenuItem>{
+                                        new MyMenuItem("menu.3.3.1.1", "ï¿½Ëµï¿½ 3.3.1.1", null)
                                         {
                                             PageType = typeof(Pages.TestWithArgs),
                                         },
-                                    ],
+                                    },
                                 },
-                            ],
+                            },
                         },
-                    ],
+                    },
                 },
-            ];
+            };
 
             hmt.SetMenu(menus);
 
@@ -170,7 +170,7 @@ namespace AntdUI_HamburgerMenuTabs
 
             if (page != null)
             {
-                // ¶¨ÒåÈ«ÆÁÏÔÊ¾´°¿Ú
+                // ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
                 var frm = new Forms.FullScreen()
                 {
                     BackColor = BackColor,
@@ -179,17 +179,17 @@ namespace AntdUI_HamburgerMenuTabs
 
                 if (page.Controls.Count > 0)
                 {
-                    // ´ÓÒ³ÃæÉÏ»ñÈ¡×Ó¿Ø¼þ
+                    // ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ï»ï¿½È¡ï¿½Ó¿Ø¼ï¿½
                     var c = page.Controls[0];
 
                     frm.SuspendLayout();
 
-                    // °Ñ×Ó¿Ø¼þÌí¼Óµ½È«ÆÁÏÔÊ¾´°¿Ú
+                    // ï¿½ï¿½ï¿½Ó¿Ø¼ï¿½ï¿½ï¿½ï¿½Óµï¿½È«ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
                     frm.Controls.Add(c);
 
                     frm.FormClosing += (s, e) =>
                     {
-                        // °Ñ´ÓÒ³ÃæÉÏ»ñÈ¡µÄ×Ó¿Ø¼þ»¹¸øÒ³Ãæ
+                        // ï¿½Ñ´ï¿½Ò³ï¿½ï¿½ï¿½Ï»ï¿½È¡ï¿½ï¿½ï¿½Ó¿Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
                         page.Controls.Add(c);
                     };
                 }

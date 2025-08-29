@@ -44,7 +44,7 @@
         {
             string dir = inputDir.Text;
 
-            if (!Path.Exists(dir)) return;
+            if (!Directory.Exists(dir)) return;
 
             tree1.SuspendLayout();
             tree1.Items.Clear();
@@ -75,7 +75,7 @@
                 }
             }
 
-            if (!Path.Exists(dir)) return;
+            if (!Directory.Exists(dir)) return;
 
             AntdUI.TreeItem item;
             TreeItemTag tag;

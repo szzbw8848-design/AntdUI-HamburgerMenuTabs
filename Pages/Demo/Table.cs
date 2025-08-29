@@ -5,7 +5,7 @@ namespace AntdUI_HamburgerMenuTabs.Pages.Demo
 {
     public partial class Table : UserControl
     {
-        private readonly BindingList<DataModel> data = [];
+        private readonly BindingList<DataModel> data = new BindingList<DataModel>();
         private bool isTableEventsInited = false;
 
         public Table()
@@ -29,7 +29,7 @@ namespace AntdUI_HamburgerMenuTabs.Pages.Demo
             {
                 Id = id;
 
-                Random rnd = new();
+                Random rnd = new Random();
 
                 _enable = rnd.Next(2) == 1;
 
@@ -127,7 +127,7 @@ namespace AntdUI_HamburgerMenuTabs.Pages.Demo
 
                 if (id == 2)
                 {
-                    List<DataModel> subLst = [];
+                    List<DataModel> subLst = new List<DataModel>();
                     for (int i = 1; i <= 5; i++)
                     {
                         var row = new DataModel(200 + i, $"SubName-{(char)('A' + rnd.Next(0, 26))}", rnd.Next(10, 100), Guid.NewGuid().ToString())
@@ -345,7 +345,7 @@ namespace AntdUI_HamburgerMenuTabs.Pages.Demo
                     Call = (value, record, idRow, idCol) =>
                     {
                         Task.Delay(500).Wait();
-                        Random rnd = new();
+                        Random rnd = new Random();
                         if (rnd.Next(2) == 1)
                         {
                             AntdUI.Message.success(ParentForm!, "成功", default, 2);
@@ -393,7 +393,7 @@ namespace AntdUI_HamburgerMenuTabs.Pages.Demo
                             {
                                 if (record.Images.Length > 0)
                                 {
-                                    List<Image> images = [];
+                                    List<Image> images = new List<Image>();
                                     foreach (var image in record.Images)
                                     {
                                         if (image.Image != null) images.Add(image.Image);
@@ -513,30 +513,30 @@ namespace AntdUI_HamburgerMenuTabs.Pages.Demo
                 {
                     if (e.Btn.Id == "edit")
                     {
-                        UserControl uc = new()
+                        UserControl uc = new UserControl()
                         {
-                            Size = new(400, 300),
+                            Size = new System.Drawing.Size(400, 300),
                         };
 
-                        AntdUI.StackPanel stackPanel = new()
+                        AntdUI.StackPanel stackPanel = new AntdUI.StackPanel()
                         {
                             Dock = DockStyle.Fill,
-                            Padding = new(10),
+                            Padding = new Padding(10),
                             Vertical = true,
                             AutoScroll = true,
                         };
                         uc.Controls.Add(stackPanel);
 
-                        AntdUI.GridPanel gridPanelName = new()
+                        AntdUI.GridPanel gridPanelName = new AntdUI.GridPanel()
                         {
                             Height = 50,
                             Span = "100 100%",
                         };
-                        AntdUI.Label lbName = new()
+                        AntdUI.Label lbName = new AntdUI.Label()
                         {
                             Text = "姓名：",
                         };
-                        AntdUI.Input inputName = new()
+                        AntdUI.Input inputName = new AntdUI.Input()
                         {
                             Text = $"{record.Name}",
                         };
@@ -545,16 +545,16 @@ namespace AntdUI_HamburgerMenuTabs.Pages.Demo
                         stackPanel.Controls.Add(gridPanelName);
                         gridPanelName.BringToFront();
 
-                        AntdUI.GridPanel gridPanelAge = new()
+                        AntdUI.GridPanel gridPanelAge = new AntdUI.GridPanel()
                         {
                             Height = 50,
                             Span = "100 100%",
                         };
-                        AntdUI.Label lbAge = new()
+                        AntdUI.Label lbAge = new AntdUI.Label()
                         {
                             Text = "年龄：",
                         };
-                        AntdUI.InputNumber inputAge = new()
+                        AntdUI.InputNumber inputAge = new AntdUI.InputNumber()
                         {
                             Value = record.Age,
                         };
@@ -563,16 +563,16 @@ namespace AntdUI_HamburgerMenuTabs.Pages.Demo
                         stackPanel.Controls.Add(gridPanelAge);
                         gridPanelAge.BringToFront();
 
-                        AntdUI.GridPanel gridPanelNotes = new()
+                        AntdUI.GridPanel gridPanelNotes = new AntdUI.GridPanel()
                         {
                             Height = 150,
                             Span = "100 100%",
                         };
-                        AntdUI.Label lbNotes = new()
+                        AntdUI.Label lbNotes = new AntdUI.Label()
                         {
                             Text = "说明：",
                         };
-                        AntdUI.Input inputNotes = new()
+                        AntdUI.Input inputNotes = new AntdUI.Input()
                         {
                             Text = $"{record.Notes}",
                             Multiline = true,
@@ -638,7 +638,7 @@ namespace AntdUI_HamburgerMenuTabs.Pages.Demo
 
             gridPanel1.Spin("数据加载中...", config =>
             {
-                Random rnd = new();
+                Random rnd = new Random();
                 int rows = 0;
 
                 data.Clear();
@@ -670,7 +670,12 @@ namespace AntdUI_HamburgerMenuTabs.Pages.Demo
                     table1.DataSource = dt;
 
                     // 添加汇总行
-                    table1.Summary = new DataSummaryModel($"总行数：{dt.Rows.Count}", $"平均值：{(int)dt.AsEnumerable().Average(row => row.Field<int?>("Age") ?? 0)}");
+                    var q = dt.AsEnumerable();
+                    int avgAge = (int)q.Select(r => {
+                        var obj = r["Age"];
+                        return obj is int i ? i : 0;
+                    }).Average();
+                    table1.Summary = new DataSummaryModel($"总行数：{dt.Rows.Count}", $"平均值：{avgAge}");
                 }
                 else if (radioDs2.Checked)
                 {
@@ -713,7 +718,7 @@ namespace AntdUI_HamburgerMenuTabs.Pages.Demo
         private void AddRow()
         {
             if (!radioDs2.Checked) return;
-            Random rnd = new();
+            Random rnd = new Random();
             int id = data.Max(x => x.Id);
             data.Add(new DataModel(id + 1, $"Name-{(char)('A' + rnd.Next(0, 26))}", rnd.Next(10, 100), Guid.NewGuid().ToString()));
             table1.Summary = new DataSummaryModel($"总行数：{data.Count}", $"平均值：{(int)data.Average(item => item.Age)}");
@@ -724,7 +729,7 @@ namespace AntdUI_HamburgerMenuTabs.Pages.Demo
         {
             if (!radioDs2.Checked) return;
 
-            List<int> ids = [];
+            List<int> ids = new List<int>();
 
             var _data = data.Where(x => x.Check).ToList();
 
@@ -738,7 +743,7 @@ namespace AntdUI_HamburgerMenuTabs.Pages.Demo
                 if (AntdUI.Modal.open(new AntdUI.Modal.Config(ParentForm!, "警告", new AntdUI.Modal.TextLine[]
                 {
                     new("是否确认删除？", 6, AntdUI.Style.Db.Warning),
-                    new($"IDs: {string.Join(',', ids)}", 6, AntdUI.Style.Db.Primary),
+                    new($"IDs: {string.Join(",", ids.Select(i => i.ToString()))}", 6, AntdUI.Style.Db.Primary),
                 }, AntdUI.TType.Warn)
                 {
                     OkType = AntdUI.TTypeMini.Warn,
@@ -774,10 +779,10 @@ namespace AntdUI_HamburgerMenuTabs.Pages.Demo
             }
             else
             {
-                var data1 = data.Where(x => x.Name?.Contains(kw, StringComparison.OrdinalIgnoreCase) == true || x.Notes?.Contains(kw, StringComparison.OrdinalIgnoreCase) == true).ToList();
+                var data1 = data.Where(x => (!string.IsNullOrEmpty(x.Name) && x.Name.IndexOf(kw, StringComparison.OrdinalIgnoreCase) >= 0) || (!string.IsNullOrEmpty(x.Notes) && x.Notes.IndexOf(kw, StringComparison.OrdinalIgnoreCase) >= 0)).ToList();
                 var data2 = new AntdUI.AntList<DataModel>(data1);
                 table1.Binding(data2);
-            }
+        }
         }
     }
 }

@@ -13,7 +13,7 @@
             Shown += FullScreen_Shown;
         }
 
-        private void FullScreen_Shown(object? sender, EventArgs e)
+        private void FullScreen_Shown(object sender, EventArgs e)
         {
             // 在全屏显示窗口中提供悬浮按钮，以便能够操作退出全屏显示
             AntdUI.FloatButton.ConfigBtn[] btns =

@@ -12,7 +12,6 @@ namespace AntdUI_HamburgerMenuTabs
             AntdUI.Config.TextRenderingHighQuality = true;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.Run(new FrmMain());
         }
     }

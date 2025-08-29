@@ -6,7 +6,7 @@
     /// </summary>
     public class Antd
     {
-        readonly static HashSet<AntdUI.Window> subWindows = [];
+        readonly static HashSet<AntdUI.Window> subWindows = new HashSet<AntdUI.Window>();
 
         /// <summary>
         /// 设置主题（读取用户配置）
